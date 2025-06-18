@@ -1,0 +1,17 @@
+{
+    "Button": {
+      "props": ["type", "onClick", "children"],
+      "usage": "<Button type=\"primary\" onClick={handleClick}>确定</Button>",
+      "description": "自定义按钮组件，支持 primary/secondary 类型"
+    },
+    "Input": {
+      "props": ["value", "onChange", "placeholder"],
+      "usage": "<Input value={val} onChange={setVal} placeholder=\"请输入\" />",
+      "description": "自定义输入框组件"
+    },
+    "Card": {
+      "props": ["title", "children"],
+      "usage": "<Card title=\"标题\">内容</Card>",
+      "description": "自定义卡片组件"
+    }
+  }
