@@ -6,13 +6,19 @@ import CodeDisplay from '@/components/CodeDisplay'
 import CodePreview from '@/components/CodePreview'
 import GenerationHistory from '@/components/GenerationHistory'
 
+interface HistoryItem {
+  id: string
+  desc: string
+  lib: string
+  code: string
+  timestamp: number
+}
+
 export default function MainPage() {
   const router = useRouter()
   const [user, setUser] = useState('')
   const [code, setCode] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
-  const [currentDesc, setCurrentDesc] = useState('')
-  const [currentLib, setCurrentLib] = useState('')
 
   useEffect(() => {
     // 检查登录状态
@@ -35,8 +41,6 @@ export default function MainPage() {
 const handleGenerate = async ({ desc, lib }: { desc: string; lib: string }) => {
     setIsGenerating(true)
     setCode('')
-    setCurrentDesc(desc)
-    setCurrentLib(lib)
     
     try {
       const response = await fetch('/api/ai/generate', {
@@ -75,7 +79,6 @@ const handleGenerate = async ({ desc, lib }: { desc: string; lib: string }) => {
   
       // 生成完成后保存到历史记录
       if (generatedCode && window.saveToHistory) {
-        // @ts-ignore
         window.saveToHistory(desc, lib, generatedCode)
       }
     } catch (error) {
@@ -86,10 +89,8 @@ const handleGenerate = async ({ desc, lib }: { desc: string; lib: string }) => {
     }
   }
   // 从历史记录加载
-  const handleLoadHistory = (item: any) => {
+  const handleLoadHistory = (item: HistoryItem) => {
     setCode(item.code)
-    setCurrentDesc(item.desc)
-    setCurrentLib(item.lib)
   }
 
   if (!user) {

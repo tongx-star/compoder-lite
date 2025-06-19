@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 interface HistoryItem {
   id: string
@@ -29,7 +29,7 @@ export default function GenerationHistory({ onLoadHistory }: GenerationHistoryPr
     }
   }, [])
 
-  const saveToHistory = (desc: string, lib: string, code: string) => {
+  const saveToHistory = useCallback((desc: string, lib: string, code: string) => {
     const newItem: HistoryItem = {
       id: Date.now().toString(),
       desc,
@@ -38,10 +38,12 @@ export default function GenerationHistory({ onLoadHistory }: GenerationHistoryPr
       timestamp: Date.now()
     }
     
-    const updatedHistory = [newItem, ...history.slice(0, 9)] // 最多保存10条记录
-    setHistory(updatedHistory)
-    localStorage.setItem('codegenHistory', JSON.stringify(updatedHistory))
-  }
+    setHistory(prevHistory => {
+      const updatedHistory = [newItem, ...prevHistory.slice(0, 9)] // 最多保存10条记录
+      localStorage.setItem('codegenHistory', JSON.stringify(updatedHistory))
+      return updatedHistory
+    })
+  }, [])
 
   const clearHistory = () => {
     setHistory([])
@@ -54,9 +56,8 @@ export default function GenerationHistory({ onLoadHistory }: GenerationHistoryPr
 
   // 暴露保存方法供父组件调用
   useEffect(() => {
-    // @ts-ignore
     window.saveToHistory = saveToHistory
-  }, [history])
+  }, [saveToHistory])
 
   return (
     <div className="mt-4">

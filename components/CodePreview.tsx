@@ -30,7 +30,7 @@ export default function CodePreview({ code }: CodePreviewProps) {
           </div>
         </div>
       )
-    } catch (error) {
+    } catch {
       return (
         <div className="border p-4 rounded-md bg-red-50">
           <p className="text-red-600">预览加载失败</p>
