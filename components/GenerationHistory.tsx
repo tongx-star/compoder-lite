@@ -62,19 +62,19 @@ export default function GenerationHistory({ onLoadHistory }: GenerationHistoryPr
   return (
     <div className="mt-4">
       <button
-        className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors text-sm"
+        className="bg-secondary text-secondary-foreground px-4 py-2 rounded-md hover:bg-secondary/80 transition-colors text-sm border border-border"
         onClick={() => setIsOpen(!isOpen)}
       >
         历史记录 ({history.length})
       </button>
       
       {isOpen && (
-        <div className="mt-4 bg-white border rounded-md p-4 max-h-96 overflow-y-auto">
+        <div className="mt-4 bg-card border border-border rounded-md p-4 max-h-96 overflow-y-auto">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-semibold">生成历史</h3>
+            <h3 className="font-semibold text-card-foreground">生成历史</h3>
             {history.length > 0 && (
               <button
-                className="text-red-500 hover:text-red-700 text-sm"
+                className="text-destructive hover:text-destructive/80 text-sm"
                 onClick={clearHistory}
               >
                 清空历史
@@ -83,17 +83,17 @@ export default function GenerationHistory({ onLoadHistory }: GenerationHistoryPr
           </div>
           
           {history.length === 0 ? (
-            <p className="text-gray-500 text-sm">暂无历史记录</p>
+            <p className="text-muted-foreground text-sm">暂无历史记录</p>
           ) : (
             <div className="space-y-3">
               {history.map((item) => (
                 <div
                   key={item.id}
-                  className="border rounded-md p-3 hover:bg-gray-50 cursor-pointer"
+                  className="border border-border rounded-md p-3 hover:bg-accent/50 cursor-pointer transition-colors"
                   onClick={() => onLoadHistory(item)}
                 >
-                  <p className="font-medium text-sm truncate">{item.desc}</p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="font-medium text-sm truncate text-card-foreground">{item.desc}</p>
+                  <p className="text-xs text-muted-foreground mt-1">
                     {item.lib === 'antd' ? 'Ant Design' : '自定义组件库'} • {formatTime(item.timestamp)}
                   </p>
                 </div>

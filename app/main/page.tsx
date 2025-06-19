@@ -98,15 +98,15 @@ const handleGenerate = async ({ desc, lib }: { desc: string; lib: string }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-background text-foreground">
       {/* 头部导航 */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-card shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-800">Compoder-Lite</h1>
+          <h1 className="text-2xl font-bold text-card-foreground">Compoder-Lite</h1>
           <div className="flex items-center space-x-4">
-            <span className="text-gray-600">欢迎，{user}</span>
+            <span className="text-muted-foreground">欢迎，{user}</span>
             <button
-              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors"
+              className="bg-destructive text-destructive-foreground px-4 py-2 rounded-md hover:bg-destructive/90 transition-colors"
               onClick={handleLogout}
             >
               退出登录
@@ -132,9 +132,9 @@ const handleGenerate = async ({ desc, lib }: { desc: string; lib: string }) => {
         </div>
 
         {/* 使用说明 */}
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-md p-4">
-          <h3 className="font-semibold text-blue-800 mb-2">使用说明：</h3>
-          <ul className="text-sm text-blue-700 space-y-1">
+        <div className="mt-8 bg-primary/10 border border-primary/20 rounded-md p-4">
+          <h3 className="font-semibold text-primary mb-2">使用说明：</h3>
+          <ul className="text-sm text-muted-foreground space-y-1">
             <li>• 选择 &quot;Ant Design&quot; 将使用 antd 组件库生成代码</li>
             <li>• 选择 &quot;自定义组件库&quot; 将使用预定义的自定义组件规范</li>
             <li>• 生成的代码支持一键复制，并会自动保存到历史记录</li>

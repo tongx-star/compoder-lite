@@ -23,20 +23,20 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h1 className="text-2xl font-bold text-center mb-6">Compoder-Lite</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background">
+      <div className="bg-card p-8 rounded-lg shadow-md w-96 border border-border">
+        <h1 className="text-2xl font-bold text-center mb-6 text-card-foreground">Compoder-Lite</h1>
         <div className="space-y-4">
           <input
             type="text"
             placeholder="请输入用户名"
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
           />
           <button
-            className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition-colors"
+            className="w-full bg-primary text-primary-foreground p-3 rounded-md hover:bg-primary/90 transition-colors"
             onClick={handleLogin}
           >
             登录
