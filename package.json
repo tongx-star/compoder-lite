@@ -10,7 +10,9 @@
     "db:schema": "npx tsx scripts/db-schema.ts",
     "db:monitor": "npx tsx scripts/db-monitor.ts",
     "db:monitor:fast": "npx tsx scripts/db-monitor.ts --interval=2",
-    "db:switch": "npx tsx scripts/db-check-and-switch.ts"
+    "db:switch": "npx tsx scripts/db-check-and-switch.ts",
+    "db:init": "npx tsx scripts/create-compoder-lite.ts",
+    "db:test": "npx tsx scripts/simple-db-test.ts"
   },
   "dependencies": {
     "@ai-sdk/deepseek": "^0.2.14",
