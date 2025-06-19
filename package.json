@@ -6,13 +6,23 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:schema": "npx tsx scripts/db-schema.ts",
+    "db:monitor": "npx tsx scripts/db-monitor.ts",
+    "db:monitor:fast": "npx tsx scripts/db-monitor.ts --interval=2",
+    "db:switch": "npx tsx scripts/db-check-and-switch.ts"
   },
   "dependencies": {
     "@ai-sdk/deepseek": "^0.2.14",
     "@ant-design/nextjs-registry": "^1.0.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "ai": "^4.3.16",
     "antd": "^5.26.1",
+    "bcryptjs": "^3.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.0",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
