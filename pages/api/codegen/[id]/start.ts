@@ -103,7 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       let updatedContext = context
 
       // 步骤1: 设计阶段
-      if (!updatedContext.state.designPhase) {
+      if (!updatedContext.state?.designPhase) {
         stream.updateStatus('designing')
         stream.write('🎨 开始设计分析阶段...')
         updatedContext = await designPhaseStep(updatedContext)
@@ -127,7 +127,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // 发送完成信号
       sendEvent('complete', { 
         codegenId: id,
-        generatedCode: updatedContext.state.generatePhase?.generatedCode 
+        generatedCode: updatedContext.state?.generatePhase?.generatedCode 
       })
 
     } catch (error) {
