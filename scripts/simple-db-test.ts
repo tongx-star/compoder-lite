@@ -38,6 +38,10 @@ async function testCompoderLite(): Promise<void> {
     console.log('✅ 数据库连接成功\n')
     
     const db = connection.connection.db
+    if (!db) {
+      throw new Error('数据库连接失败')
+    }
+    
     console.log(`📊 当前数据库: ${db.databaseName}`)
     
     // 尝试简单的操作 - 创建一个测试集合

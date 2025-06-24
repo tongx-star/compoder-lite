@@ -50,7 +50,12 @@ async function checkAndSwitchDatabase(): Promise<void> {
     
     console.log('✅ MongoDB 连接成功')
     
-    const adminDb = connection.connection.db.admin()
+    const db = connection.connection.db
+    if (!db) {
+      throw new Error('数据库连接失败')
+    }
+    
+    const adminDb = db.admin()
     
     // 列出所有数据库
     console.log('\n📊 当前 MongoDB 实例中的所有数据库：')
@@ -62,7 +67,7 @@ async function checkAndSwitchDatabase(): Promise<void> {
     let hasCompoderLite = false
     
     databases.forEach((database, index) => {
-      const sizeInMB = (database.sizeOnDisk / 1024 / 1024).toFixed(2)
+      const sizeInMB = ((database.sizeOnDisk || 0) / 1024 / 1024).toFixed(2)
       const emoji = database.name === 'compoder-lite' ? '🎯' : '📁'
       console.log(`${emoji} ${index + 1}. ${database.name} (${sizeInMB} MB)`)
       
@@ -74,7 +79,7 @@ async function checkAndSwitchDatabase(): Promise<void> {
     console.log('=' .repeat(50))
     
     // 检查当前连接的数据库
-    const currentDb = connection.connection.db
+    const currentDb = db
     console.log(`\n📍 当前连接的数据库: ${currentDb.databaseName}`)
     
     if (currentDb.databaseName === 'compoder-lite') {

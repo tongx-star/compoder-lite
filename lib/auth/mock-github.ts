@@ -30,8 +30,19 @@ export interface MockGitHubUser {
   avatar_url: string
 }
 
+interface AuthResult {
+  user: {
+    _id: string
+    email: string
+    name: string
+    avatar: string
+    githubId: string
+  }
+  token: string
+}
+
 // 模拟 GitHub OAuth 授权
-export async function mockGitHubAuth(username: string): Promise<{ user: any, token: string } | null> {
+export async function mockGitHubAuth(username: string): Promise<AuthResult | null> {
   const githubUser = MOCK_GITHUB_USERS.find(u => u.login === username)
   if (!githubUser) return null
 
@@ -69,7 +80,8 @@ export function verifyToken(token: string) {
 }
 
 // 真实 GitHub OAuth 预留接口（TODO: 实现真实 GitHub OAuth）
-export async function realGitHubAuth(code: string) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function realGitHubAuth(_code: string) {
   // TODO: 实现真实的 GitHub OAuth 流程
   // 1. 用 code 换取 access_token
   // 2. 用 access_token 获取用户信息

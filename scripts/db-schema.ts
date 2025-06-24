@@ -36,6 +36,10 @@ async function analyzeSchema(): Promise<void> {
     console.log('✅ 数据库连接成功\n')
     
     const db = connection.connection.db
+    if (!db) {
+      throw new Error('数据库连接失败')
+    }
+    
     const collections = await db.listCollections().toArray()
     
     console.log('🗄️  数据库结构分析报告')

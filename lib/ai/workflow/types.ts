@@ -1,6 +1,11 @@
 export interface WorkflowContext {
   stream: {
     write: (chunk: string) => void;
+    writeCode: (chunk: string) => void;
+    startCode: () => void;
+    endCode: () => void;
+    updateStatus: (status: string) => void;
+    error: (message: string) => void;
     close: () => void;
   };
   query: {
@@ -10,7 +15,7 @@ export interface WorkflowContext {
     }[];
     userId: string;
     codegenId: string;
-    selectedLibraries: "antd" | "custom";
+    selectedLibraries: "antd" | "shadcn" | "custom";
   };
   state?: {
     designPhase?: {
@@ -24,6 +29,7 @@ export interface WorkflowContext {
       aiModel: string;
       ragContext: string;
     };
+    error?: string;
   };
 }
 

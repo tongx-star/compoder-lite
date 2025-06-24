@@ -49,6 +49,10 @@ class DatabaseMonitor {
     if (!this.connection) throw new Error('数据库未连接')
     
     const db = this.connection.connection.db
+    if (!db) {
+      throw new Error('数据库连接失败')
+    }
+    
     const collection = db.collection(collectionName)
     
     // 获取文档数量
@@ -125,6 +129,9 @@ class DatabaseMonitor {
     if (!this.connection) throw new Error('数据库未连接')
     
     const db = this.connection.connection.db
+    if (!db) {
+      throw new Error('数据库连接失败')
+    }
     
     // 清屏
     console.clear()
